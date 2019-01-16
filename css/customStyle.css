@@ -1,0 +1,11 @@
+.paymentBox{
+    flex-wrap: nowrap;
+}
+
+.paymentInnerBox{
+    display: flex;
+}
+
+.customAmount{
+    max-width: 100%;
+}
