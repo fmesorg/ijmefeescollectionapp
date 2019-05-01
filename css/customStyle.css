@@ -4,8 +4,34 @@
 
 .paymentInnerBox{
     display: flex;
+    max-height: 50px;
+
 }
 
 .customAmount{
     max-width: 100%;
+}
+
+@media only screen and (max-width: 800px) {
+    .card{
+        max-width: 100%;
+    }
+}
+
+@media only screen and (min-width: 800px){
+.card {
+    max-width: 60%;
+    margin: 0 auto;
+    float: none;
+    margin-bottom: 10px;
+}}
+
+.ijmelogo{
+    max-width: 60%;
+}
+
+.btn.disabled, .btn:disabled{
+    border: 1px solid #999999;
+    background-color: #cccccc;
+    color: #666666;
 }
