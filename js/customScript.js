@@ -52,7 +52,6 @@ var clearCustomPaymentBox = function () {
 var updateCustomPayAmount = function(){
     amount = document.getElementById('customAmount').value;
     updatePayAmountButton();
-    enableSubmitIfAllFilled();
 }
 
 var updatePayAmountButton = function(){
@@ -101,7 +100,6 @@ var updateBtnPayAmount = function () {
     }
     setBillingAmount(amount);
     updatePayAmountButton();
-    enableSubmitIfAllFilled();
 }
 
 var setBillingAmount = function (value) {
@@ -198,3 +196,31 @@ function isNumberKey(evt){
 var getSelectedValue = function (elementId) {
     return document.getElementById(elementId).value;
 };
+
+var ifAllFilled = function() {
+  var check = true;
+
+  if(!hasValue("billing_name")){check = false;}
+
+  if(!hasValue("billing_address")){check = false;}
+  if(!hasValue("billing_city")){check = false;}
+  if(!hasValue("billing_state")){check = false;}
+  if(!hasValue("billing_zip")){check = false;}
+
+  if(!isValueSelected("billing_country")){check = false;}
+  if(!hasValue("contactNumber")){check = false};
+  if(!hasValue("currency")){check = false};
+  if(!isNotBlank("emailId")){check = false};
+  if(!isAmountSet("amount")){check = false};
+
+return check;
+};
+
+
+var hideGSTfield = function () {
+    document.getElementById('gstField').hidden = true;
+}
+
+var showGSTfield = function () {
+    document.getElementById('gstField').hidden = false;
+}

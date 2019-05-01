@@ -39,15 +39,17 @@
             var country = document.getElementById("billing_country").value;
             var currency="USD";
             if (country === "India") {
+                showGSTfield();
                 currency = "INR";
             } else if (country === "Select") {
+                hideGSTfield();
                 currency = "";
             } else {
+                hideGSTfield();
                 currency = "USD";
             }
             document.getElementById("currency").value=currency;
             setAmountType(currency);
-            enableSubmitIfAllFilled();
             setFinalAmount();
         };
 
@@ -59,7 +61,6 @@
             var code = document.getElementById("countryCode").value;
             var number = document.getElementById("contactNumber").value;
             document.getElementById("billing_tel").value = code+number;
-            enableSubmitIfAllFilled();
         }
 
 
@@ -75,8 +76,8 @@
             setElementValue("order_id", '00000000000000' + moment().format('YYYYMMDDhhmmssss'));
             setElementValueWithURL('redirect_url', 'ccavResponseHandler.php');
             setElementValueWithURL('cancel_url', 'ccavResponseHandler.php');
+            hideGSTfield();
 
-           // setSubmitButtonState(false);
         };
     </script>
 </head>
@@ -101,34 +102,35 @@
     <div class="card">
         <div class="card-header">
             Article Processing Fees
+            <h6>Please Enter the following details</h6>
         </div>
         <form method="post" action="ccavRequestHandler.php" role="form">
             <div class="card-body">
-                <h5 class="card-title">Please Enter the following details</h5>
+<!--                <h5 class="card-title">Please Enter the following details</h5>-->
             <!--Personal Details -->
             <div class="form-row">
             <div class="form-group col-md-6">
                     <label for="billing_name">Name*</label>
-                    <input type="text" name="billing_name" id="billing_name" class="form-control" placeholder="Name" required onchange="enableSubmitIfAllFilled()">
+                    <input type="text" name="billing_name" id="billing_name" class="form-control"  required">
                 </div>
             </div>
 
             <div class="form-group">
                 <label for="billing_address">Address*</label>
-                <input type="text" name="billing_address" class="form-control" id="billing_address" placeholder="1234 Main St" required onchange="enableSubmitIfAllFilled()">
+                <input type="text" name="billing_address" class="form-control" id="billing_address"  required >
             </div>
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label for="billing_city">City*</label>
-                    <input type="text" name="billing_city" class="form-control" id="billing_city" required onchange="enableSubmitIfAllFilled()">
+                    <input type="text" name="billing_city" class="form-control" id="billing_city" required >
                 </div>
                 <div class="form-group col-md-4">
                     <label for="billing_state">State*</label>
-                    <input type="text" name="billing_state" id="billing_state" class="form-control" required onchange="enableSubmitIfAllFilled()">
+                    <input type="text" name="billing_state" id="billing_state" class="form-control" required >
                 </div>
                 <div class="form-group col-md-2">
                     <label for="billing_zip">Zip/Postal*</label>
-                    <input type="text" name="billing_zip" class="form-control" id="billing_zip" required onchange="enableSubmitIfAllFilled()">
+                    <input type="text" name="billing_zip" class="form-control" id="billing_zip" required >
                 </div>
             </div>
             <div class="form-row">
@@ -146,7 +148,7 @@
                         <span class="input-group-text" id="basic-addon1">+</span>
                     </div>
                     <input type="text" id="countryCode" class="form-control col-2" aria-label="Country Code" aria-describedby="basic-addon1" maxlength="3" onkeypress="return isNumberKey(event)">
-                    <input type="text" id="contactNumber" class="form-control col-auto" placeholder="Number" aria-label="Country Code" aria-describedby="basic-addon1" onchange="setBillingTel()" onkeypress="return isNumberKey(event)"  maxlength="10">
+                    <input type="text" id="contactNumber" class="form-control col-auto"  aria-label="Country Code" aria-describedby="basic-addon1" onchange="setBillingTel()" onkeypress="return isNumberKey(event)"  maxlength="10">
                     </div>
                 </div>
 
@@ -159,7 +161,7 @@
                     <div class="input-group-prepend">
                         <div class="input-group-text"><i class="fa fa-envelope text-info"></i></div>
                     </div>
-                    <input type="email" class="form-control" id="emailId" name="billing_email" placeholder="ejemplo@gmail.com" required onchange="enableSubmitIfAllFilled()" onfocus="enableSubmitIfAllFilled()" >
+                    <input type="email" class="form-control" id="emailId" name="billing_email"  required>
                 </div>
                 </div>
             </div>
@@ -193,10 +195,10 @@
         <br>
 
         <div class="form-row">
-            <div class="col-sm-12 col-md-6">
+            <div class="col-sm-12 col-md-6" id="gstField">
         <label for="gstIn">GST Number</label>
         <input type="text" id="gstIn" class="form-control" aria-describedby="gstHelpBdy">
-        <small id="passwordHelpBlock" class="form-text text-muted">For Indian Payers,   Please provide only if applicable</small>
+        <small id="passwordHelpBlock" class="form-text text-muted">Please provide only if applicable</small>
             </div>
         </div>
 
@@ -204,7 +206,7 @@
         <div class="clearfix"></div>
         <br><br>
         <div class="form-row">
-            <button class="btn btn-info btn-lg btn-block" id="btn_pay" onclick="ifAllFillled()">Pay</button>
+            <button class="btn btn-info btn-lg btn-block" id="btn_pay" onclick="ifAllFilled()">Pay</button>
         </div>
 
             <input type="text" name="language" value="en" hidden/>
