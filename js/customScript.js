@@ -211,11 +211,26 @@ var ifAllFilled = function() {
   if(!hasValue("contactNumber")){check = false};
   if(!hasValue("currency")){check = false};
   if(!isNotBlank("emailId")){check = false};
-  if(!isAmountSet("amount")){check = false};
+  if(!isNotBlank("amount")||!isAmountSet("amount")){
+      check = false
+      document.getElementById("amountBox").style.border = "solid 1px red";
+  }else{
+      document.getElementById("amountBox").style.border = "";
+  }
 
 return check;
 };
 
+var checkFields = function () {
+    if(ifAllFilled()){
+        clickSubmit();
+        return true;
+    }
+}
+
+function clickSubmit() {
+    document.getElementById("submit").click();
+}
 
 var hideGSTfield = function () {
     document.getElementById('gstField').hidden = true;

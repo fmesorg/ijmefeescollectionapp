@@ -168,8 +168,8 @@
             <div class="card-body">
             <h5 class="card-title">Payment Details</h5>
 
-        <div class="form-row paymentBox">
-            <div class="col-sm-12 paymentInnerBox">
+        <div class="form-row paymentBox" >
+            <div class="col-sm-12 paymentInnerBox" id="amountBox">
             <div class="btn-group btn-group-lg btn-group-toggle"  id="paymentButtonGroup" onclick="clearCustomPaymentBox()">
                 <label class="btn btn-outline-secondary" id="op1" onclick="updateButtonState('op1')">
                     <input type="radio" name="options" id="option1" autocomplete="off" >$150
@@ -205,7 +205,7 @@
         <div class="clearfix"></div>
         <br><br>
         <div class="form-row">
-            <button class="btn btn-info btn-lg btn-block" id="btn_pay" onclick="ifAllFilled()">Pay</button>
+            <div class="btn btn-info btn-lg btn-block" id="btn_pay" onclick="checkFields()">Pay</div>
         </div>
 
             <input type="text" name="language" value="en" hidden/>
@@ -218,6 +218,7 @@
             <input type="text" name="currency" id="currency" hidden>
             <input type="text" name="amount" id="amount" hidden>
             <input type="text" name="billing_tel" id="billing_tel" hidden>
+                <input type="submit" value="Submit" id="submit" hidden>
 
         </div>
         </form>
