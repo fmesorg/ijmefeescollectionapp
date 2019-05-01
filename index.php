@@ -101,7 +101,6 @@
 <div class="container">
     <div class="card">
         <div class="card-header">
-            Article Processing Fees
             <h6>Please Enter the following details</h6>
         </div>
         <form method="post" action="ccavRequestHandler.php" role="form">

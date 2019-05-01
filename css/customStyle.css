@@ -13,7 +13,7 @@
 }
 
 .navbar{
-    border-bottom: solid 15px red;
+    border-bottom: solid 15px #E01F1F;
 }
 
 @media only screen and (max-width: 800px) {
