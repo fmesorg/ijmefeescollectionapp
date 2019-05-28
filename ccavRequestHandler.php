@@ -8,7 +8,6 @@
     <?php include('accessDetails.php') ?>
     <?php
     error_reporting(-1);
-
     $working_key = CCAVENUE_WORKING_KEY;
     $access_code = CCAVENUE_ACCESS_CODE;
 
@@ -46,6 +45,7 @@
     $merchant_data.= 'language='.$post['language'].'&';
     $merchant_data.= 'integration_type='.$post['integration_type'].'&';
     $merchant_data.= 'redirect_url='.$post['redirect_url'].'&';
+    $merchant_data.= 'merchant_param1='.$post['refrerUrl'].'&';
     $merchant_data.= 'cancel_url='.$post['cancel_url'].'&';
     $merchant_data.= 'tid='.$post['tid'].'&';
     $merchant_data.= 'merchant_id='.$post['merchant_id'].'&';

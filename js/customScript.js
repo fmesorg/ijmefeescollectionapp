@@ -151,7 +151,7 @@ var isNotBlank = function (elementID) {
         document.getElementById(elementID).style.borderColor="";
         return true;
     }
-}
+};
 
 var isAmountSet = function (elementId) {
     var amountValue = getSelectedValue(elementId);
@@ -191,7 +191,7 @@ function isNumberKey(evt){
     if (charCode > 31 && (charCode < 48 || charCode > 57))
         return false;
     return true;
-}
+};
 
 var getSelectedValue = function (elementId) {
     return document.getElementById(elementId).value;
@@ -211,6 +211,7 @@ var ifAllFilled = function() {
   if(!hasValue("contactNumber")){check = false};
   if(!hasValue("currency")){check = false};
   if(!isNotBlank("emailId")){check = false};
+
   if(!isNotBlank("amount")||!isAmountSet("amount")){
       check = false
       document.getElementById("amountBox").style.border = "solid 1px red";
@@ -221,12 +222,13 @@ var ifAllFilled = function() {
 return check;
 };
 
+
 var checkFields = function () {
     if(ifAllFilled()){
         clickSubmit();
         return true;
     }
-}
+};
 
 function clickSubmit() {
     document.getElementById("submit").click();
@@ -234,8 +236,8 @@ function clickSubmit() {
 
 var hideGSTfield = function () {
     document.getElementById('gstField').hidden = true;
-}
+};
 
 var showGSTfield = function () {
     document.getElementById('gstField').hidden = false;
-}
+};

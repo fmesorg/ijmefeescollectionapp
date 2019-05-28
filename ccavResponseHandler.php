@@ -32,9 +32,16 @@ for ($i = 0; $i < $dataSize; $i++) {
         $order_status = $information[1];
 }
 
+//   print_r($decryptValues);
+
+$urlString = $decryptValues[26];
+$urlString = str_replace("merchant_param1=","",$urlString);
+$urlString = str_replace("https","https:/",$urlString);
+$urlString = str_replace("galley","?galley=",$urlString);
+
 if ($order_status === "Success") {
     echo "<br><b>Thank you for your support. Your transaction is successful.</b>";
-    echo "<br/><br/><br/><p style='font-size: 30px'>You May close this window and continue. You can find the transaction details below.</p>";
+   if(!empty($urlString)){echo "<br/><br/><br/><p style='font-size: 30px'><a href='$urlString'>Click Here </a> to continue reading the article.</p>";}
 } else if ($order_status === "Aborted") {
     echo "<br><b>Thank you for your support. We will keep you posted regarding the status of your order through e-mail</b>";
 } else if ($order_status === "Failure") {

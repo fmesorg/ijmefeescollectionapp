@@ -76,6 +76,11 @@
             setElementValue("order_id", '00000000000000' + moment().format('YYYYMMDDhhmmssss'));
             setElementValueWithURL('redirect_url', 'ccavResponseHandler.php');
             setElementValueWithURL('cancel_url', 'ccavResponseHandler.php');
+            <?php if (isset($_GET['refrer_url'])){?>
+            setElementValue('refrerUrl','<?php echo $_GET['refrer_url'];?>');
+            <?php }
+            else{ ?> setElementValue('refrerUrl', 'null');
+             <?php } ?>
             hideGSTfield();
 
         };
@@ -218,7 +223,8 @@
             <input type="text" name="currency" id="currency" hidden>
             <input type="text" name="amount" id="amount" hidden>
             <input type="text" name="billing_tel" id="billing_tel" hidden>
-                <input type="submit" value="Submit" id="submit" hidden>
+            <input type="text" name="refrerUrl" id="refrerUrl" hidden>
+            <input type="submit" value="Submit" id="submit" hidden>
 
         </div>
         </form>
