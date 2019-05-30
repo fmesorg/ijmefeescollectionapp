@@ -35,37 +35,6 @@
             });
         };
 
-        var countrySelected = function () {
-            var country = document.getElementById("billing_country").value;
-            var currency="USD";
-            if (country === "India") {
-                showGSTfield();
-                currency = "INR";
-            } else if (country === "Select") {
-                hideGSTfield();
-                currency = "";
-            } else {
-                hideGSTfield();
-                currency = "USD";
-            }
-            document.getElementById("currency").value=currency;
-            setAmountType(currency);
-            setFinalAmount();
-        };
-
-        var setFinalAmount = function () {
-            document.getElementById("amount").value = amount;
-        }
-
-        var setBillingTel = function () {
-            var code = document.getElementById("countryCode").value;
-            var number = document.getElementById("contactNumber").value;
-            document.getElementById("billing_tel").value = code+number;
-        }
-
-
-
-
     </script>
 
     <script>
@@ -227,6 +196,25 @@
             <input type="submit" value="Submit" id="submit" hidden>
 
         </div>
+
+         <table class="table">
+             <tr >
+                 <td>Selected Amount</td>
+                 <td><input type="text" name="selectedAmount" id="selectedAmount" readonly style="text-align: center"/></td>
+             </tr><tr >
+                 <td>Payment Gateway Fees:</td>
+                 <td><input type="text" name="txFee" id="txFee" readonly style="text-align: center"/></td>
+             </tr>
+             <tr >
+                 <td>GST:</td>
+                 <td><input type="text" name="fmesGST" id="fmesGST" readonly style="text-align: center"/></td>
+             </tr>
+             <tr>
+                 <td>Total amount (inclusive of payment gateway charges & 18% GST):</td>
+                 <td><input type="text" name="TotalAmount" id="TotalAmount" readonly style="text-align: center"/></td>
+             </tr>
+         </table>
+
         </form>
 
     </div>
