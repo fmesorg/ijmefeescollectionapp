@@ -1,10 +1,6 @@
 var countrySelected = function () {
-    clearCustomPaymentBox();
-    clearPaymentBox();
-    updateBtnAmount("","");
-
-    let country = document.getElementById("billing_country").value;
-    let currency = "USD";
+    var country = document.getElementById("billing_country").value;
+    var currency = "USD";
     if (country === "India") {
         showGSTfield();
         currency = "INR";
@@ -17,6 +13,7 @@ var countrySelected = function () {
     }
     document.getElementById("currency").value = currency;
     setAmountType(currency);
+    setFinalAmount();
 };
 
 var setFinalAmount = function (amount) {
@@ -44,45 +41,29 @@ var setOptionInactive = function (option) {
     document.getElementById(option).classList.remove('active');
 };
 
-var setINR = function (currency) {
-    let currencySymbol = document.getElementById('customCurrency').textContent = '₹';
-    setAmountByCurrency(currency,currencySymbol);
+var setINR = function () {
+    currency = document.getElementById('customCurrency').textContent = '₹';
+    setAmountByCurrency();
 };
 
-var setUSD = function (currency) {
-    let currencySymbol = document.getElementById('customCurrency').textContent = '$';
-    setAmountByCurrency(currency,currencySymbol);
+var setUSD = function () {
+    currency = document.getElementById('customCurrency').textContent = '$';
+    setAmountByCurrency();
 };
-
-function getSelectedCurrency() {
-    return getSelectedValue('currency');
-}
-
-var getCurrencySymbol = function (currency) {
-    if(currency==='INR')
-    {
-        return '₹';
-    }else if(currency==="USD")
-    {
-        return '$';
-    }else{
-        return "";
-    }
-}
 
 var amountMap = {
     "USD": {"op1": 150, "op2": 100, "op3": 50},
     "INR": {"op1": 10000, "op2": 8000, "op3": 5000}
 };
 
-var setAmountByCurrency = function (currency,currencySymbol) {
-    document.getElementById('op1').textContent = currencySymbol + getAmountForOpField('op1',currency);
-    document.getElementById('op2').textContent = currencySymbol + getAmountForOpField('op2',currency);
-    document.getElementById('op3').textContent = currencySymbol + getAmountForOpField('op3',currency);
+var setAmountByCurrency = function () {
+    document.getElementById('op1').textContent = currency + getAmountForOpField('op1');
+    document.getElementById('op2').textContent = currency + getAmountForOpField('op2');
+    document.getElementById('op3').textContent = currency + getAmountForOpField('op3');
 };
 
 
-var getAmountForOpField = function (fieldName,currency) {
+var getAmountForOpField = function (fieldName) {
     return amountMap[currency][fieldName];
 }
 
@@ -98,12 +79,12 @@ var clearCustomPaymentBox = function () {
 }
 
 var updateCustomPayAmount = function () {
-    var amount = document.getElementById('customAmount').value;
-    calculateFinalBillingAmount(getSelectedCurrency(),amount);
+    amount = document.getElementById('customAmount').value;
+    updatePayAmountButton();
 }
 
-var updateBtnAmount = function (currency, amount) {
-    document.getElementById('btn_pay').textContent = "Pay " + getCurrencySymbol(currency) + " " + amount;
+var updatePayAmountButton = function (currency, amount) {
+    document.getElementById('btn_pay').textContent = "Pay " + currency + " " + amount;
     setBillingAmount(amount);
 }
 
@@ -125,13 +106,13 @@ var updateButtonState = function (value) {
             setOptionActive('op3');
             break;
     }
-    updateBtnAmountBasedOnOption(getSelectedValue('currency'));
+    updateBtnPayAmount();
 }
 
 
-var updateBtnAmountBasedOnOption = function (currency) {
+var updateBtnPayAmount = function () {
     switch (currency) {
-        case 'USD':
+        case '$':
             if (document.getElementById('op1').classList.contains('active')) {
                 amount = "150";
             } else if (document.getElementById('op2').classList.contains('active')) {
@@ -143,9 +124,9 @@ var updateBtnAmountBasedOnOption = function (currency) {
             }
             break;
 
-        case 'INR' :
+        case '₹' :
             if (document.getElementById('op1').classList.contains('active')) {
-                amount = "10000";
+                amount = "1000";
             } else if (document.getElementById('op2').classList.contains('active')) {
                 amount = "8000";
             } else if (document.getElementById('op3').classList.contains('active')) {
@@ -156,12 +137,8 @@ var updateBtnAmountBasedOnOption = function (currency) {
             break;
     }
 
-    calculateFinalBillingAmount(getSelectedCurrency(),amount);
 
-};
-
-function calculateFinalBillingAmount(currency,amount) {
-
+    // var currency = getSelectedValue("currency");
     var txFeePercentage = currency === 'INR' ? 0.02 : 0.0499;
     var expectedAmount = Number(amount);
 
@@ -169,18 +146,14 @@ function calculateFinalBillingAmount(currency,amount) {
     var ccAvenueTxFees = calculateTxFee(total, txFeePercentage);
     var gstCCAvenueTxFees = Number(ccAvenueTxFees * 0.18);
     var fmesGST = Number(total - (expectedAmount + ccAvenueTxFees + gstCCAvenueTxFees));
+    document.getElementById("fmesGST").value = fmesGST.toFixed(2);
+    document.getElementById("txFeesGST").value = gstCCAvenueTxFees.toFixed(2);
+    document.getElementById("txFee").value = ccAvenueTxFees.toFixed(2);
+    document.getElementById("TotalAmount").value = total.toFixed(2);
 
-    var paymentGateWayFees = (ccAvenueTxFees+gstCCAvenueTxFees).toFixed(2);
-
-    // document.getElementById("txFeesGST").value = gstCCAvenueTxFees.toFixed(2);
-
-    document.getElementById("selectedAmount").value = getCurrencySymbol(currency)+expectedAmount.toFixed(2);
-    document.getElementById("txFee").value = getCurrencySymbol(currency)+paymentGateWayFees;
-    document.getElementById("fmesGST").value = getCurrencySymbol(currency)+fmesGST.toFixed(2);
-    document.getElementById("TotalAmount").value = getCurrencySymbol(currency)+total.toFixed(2);
 
     setBillingAmount(total.toFixed(2));
-    updateBtnAmount(currency, total.toFixed(2));
+    updatePayAmountButton(currency, total.toFixed(2));
 }
 
 var setBillingAmount = function (value) {
@@ -189,9 +162,9 @@ var setBillingAmount = function (value) {
 
 var setAmountType = function (currency) {
     if (currency === 'INR') {
-        setINR(currency);
+        setINR();
     } else {
-        setUSD(currency);
+        setUSD();
     }
 }
 
@@ -236,7 +209,7 @@ var isNotBlank = function (elementID) {
 
 var isAmountSet = function (elementId) {
     var amountValue = getSelectedValue(elementId);
-    if (parseInt(amountValue) === 0) {
+    if (amountValue === "0") {
         document.getElementById(elementId).style.borderColor = "red";
         return false;
     } else {
@@ -244,17 +217,6 @@ var isAmountSet = function (elementId) {
         return true;
     }
 };
-
-function isValidEmail()
-{
-    if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(document.getElementById("emailId").value))
-    {
-        return true
-    }else{
-        return false
-    }
-}
-
 
 var isValueSelected = function (elementId) {
     if (document.getElementById(elementId).selectedIndex !== 0) {
@@ -264,6 +226,7 @@ var isValueSelected = function (elementId) {
         document.getElementById(elementId).style.borderColor = "red";
         return false
     }
+    // return document.getElementById(elementId).selectedIndex !== 0;
 };
 
 var hasValue = function (elementId) {
@@ -274,6 +237,7 @@ var hasValue = function (elementId) {
         document.getElementById(elementId).style.borderColor = "red";
         return false;
     }
+    // return getSelectedValue(elementId) !== '';
 };
 
 function isNumberKey(evt) {
@@ -310,8 +274,10 @@ var ifAllFilled = function () {
     if (!isValueSelected("billing_country")) {
         check = false;
     }
-    if(!hasValue("contactNumber")){check = false};
-    if(!hasValue("countryCode")){check = false };
+    if (!hasValue("contactNumber")) {
+        check = false
+    }
+    ;
     if (!hasValue("currency")) {
         check = false
     }
@@ -319,19 +285,13 @@ var ifAllFilled = function () {
     if (!isNotBlank("emailId")) {
         check = false
     }
-    if (!isValidEmail()){
-        check = false;
-        document.getElementById("emailId").style.border = "solid 1px red";
-    }
+    ;
 
     if (!isNotBlank("amount") || !isAmountSet("amount")) {
         check = false
-        document.getElementById("paymentButtonGroup").style.border = "solid 1px red";
-        document.getElementById("paymentButtonGroup").style.borderRadius = ".3rem";
-        document.getElementById("customAmount").style.border = "solid 1px red";
+        document.getElementById("amountBox").style.border = "solid 1px red";
     } else {
-        document.getElementById("paymentButtonGroup").style.border = "";
-        document.getElementById("customAmount").style.border = "";
+        document.getElementById("amountBox").style.border = "";
     }
 
     return check;

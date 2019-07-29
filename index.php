@@ -75,7 +75,7 @@
 <div class="container">
     <div class="card">
         <div class="card-header">
-            <h6>Please Enter the following details</h6>
+            <h6>$$ Please Enter the following details $$</h6>
         </div>
         <form method="post" action="ccavRequestHandler.php" role="form">
             <div class="card-body">
@@ -206,7 +206,7 @@
                  <td><input type="text" name="txFee" id="txFee" readonly style="text-align: center"/></td>
              </tr>
              <tr >
-                 <td>GST:</td>
+                 <td>GST(Tax):</td>
                  <td><input type="text" name="fmesGST" id="fmesGST" readonly style="text-align: center"/></td>
              </tr>
              <tr>
