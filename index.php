@@ -61,21 +61,15 @@
 <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 navbar-brand">
     <a href="https://ijme.in"><img src="https://ijme.in/wp-content/themes/ijme/images/logo.jpg" alt="Page Header" class="ijmelogo"></a>
 </div>
-
-    <div class="top-nav-btnI top-nb c-logo">
-        <a href="http://ijme.in/nbc-20140321/index.php/14th-wcb-india/index/pages/view/home-page">
-            <img src="https://ijme.in/wp-content/themes/ijme/images/nbc.jpg" alt=""></a>
-    </div>
-    <div class="top-nav-btnI border"><a href="http://ijme.in/nbc-20140321/index.php/14th-wcb-india/index/pages/view/home-page"><img src="https://ijme.in/wp-content/themes/ijme/images/14-world-congress-of-bioethics-logo.jpg" alt="14th-wcb"></a></div>
-    <div class="top-nav-btnI border"><a href="https://ijme.in/about-us/fmes/overview/"><img src="https://ijme.in/wp-content/themes/ijme/images/search.jpg" alt="fmes"></a></div>
+    <div class="top-nav-btnI border"><a href="https://ijme.in/about-us/fmes/overview/"><img width="120px" src="https://ijme.in/wp-content/themes/ijme/images/footer/fmes_logo.svg" alt="fmes"></a></div>
 
 </nav>
 
 
 <div class="container">
     <div class="card">
-        <div class="card-header">
-            <h6>Please Enter the following details</h6>
+        <div class="card-header" style= "text-align: center;">
+            <h6 style="font-weight: bold">Please enter the following details to use IJME's Pay What You Want (PWYW) system to pay a fee for the full-text access or pdf download of this article</h6>
         </div>
         <form method="post" action="ccavRequestHandler.php" role="form">
             <div class="card-body">
@@ -142,27 +136,32 @@
             <div class="card-body">
             <h5 class="card-title">Payment Details</h5>
 
-        <div class="form-row paymentBox" >
-            <div class="col-sm-12 paymentInnerBox" id="amountBox">
-            <div class="btn-group btn-group-lg btn-group-toggle"  id="paymentButtonGroup" onclick="clearCustomPaymentBox()">
-                <label class="btn btn-outline-secondary" id="op1" onclick="updateButtonState('op1')">
-                    <input type="radio" name="options" id="option1" autocomplete="off" >$150
-                </label>
-                <label class="btn btn-outline-secondary" id="op2" onclick="updateButtonState('op2')">
-                    <input type="radio" name="options" id="option2" autocomplete="off">$100
-                </label>
-                <label class="btn btn-outline-secondary" id="op3" onclick="updateButtonState('op3')">
-                    <input type="radio" name="options" id="option3" autocomplete="off">$50
-                </label>
-            </div>
-            <div class="btn-group input-group input-group-lg ml-2 customAmount" role="group">
-                <div class="input-group-prepend">
-                    <div class="input-group-text" id="customCurrency">$</div>
+                <div class="form-row">
+                    <div class="form-group col-md-6" style="padding-left: 10px">
+                        <div class="btn-group btn-group-lg btn-group-toggle" id="paymentButtonGroup"
+                             onclick="clearCustomPaymentBox()">
+                            <label class="btn btn-outline-secondary" id="op1" onclick="updateButtonState('op1')">
+                                <input type="radio" class="form-control" name="options" id="option1" autocomplete="off">150
+                            </label>
+                            <label class="btn btn-outline-secondary" id="op2" onclick="updateButtonState('op2')">
+                                <input type="radio" class="form-control" name="options" id="option2" autocomplete="off">100
+                            </label>
+                            <label class="btn btn-outline-secondary" id="op3" onclick="updateButtonState('op3')">
+                                <input type="radio" class="form-control" name="options" id="option3" autocomplete="off">50
+                            </label>
+                        </div>
+                    </div>
+                    <div class=" col-md-6">
+                        <div class="btn-group input-group input-group-lg ml-2 " role="group">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text" id="customCurrency"></div>
+                            </div>
+                            <input type="text" class="form-control" id="customAmount" name="customAmount"
+                                   placeholder="Any Other Amount" onkeypress="clearPaymentBox()"
+                                   onkeyup="updateCustomPayAmount()">
+                        </div>
+                    </div>
                 </div>
-                <input type="text" class="form-control" id="customAmount" name="customAmount" placeholder="Any Other Amount" onkeypress="clearPaymentBox()" onkeyup="updateCustomPayAmount()">
-            </div>
-            </div>
-        </div>
 
         <div class="clearfix"></div>
         <br>

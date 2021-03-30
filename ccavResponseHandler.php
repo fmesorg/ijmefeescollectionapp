@@ -20,9 +20,10 @@ $dataSize = sizeof($decryptValues);
 echo "<center>";
 echo "<div style='background-color: gray()'>
         <br/>
-        <img alt=\"world-congress-of-bioethics-logo\" src=\"https://ijme.in/nbc-20140321/custom/img/14-world-congress-of-bioethics-logo.jpg\" style=\"{float: left}\">
+          <a href=\"https://ijme.in\"><img width=\"120px\" src=\"https://ijme.in/wp-content/themes/ijme/images/logo.jpg\" alt=\"Page Header\" class=\"ijmelogo\"></a>
+       <img width=\"120px\" src=\"https://ijme.in/wp-content/themes/ijme/images/footer/fmes_logo.svg\" alt=\"fmes\">
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <img alt=\"NBC Logo\" src=\"https://ijme.in/nbc-20140321/custom/img/nbc-logo.jpg\">
+        </a>
         <br/>
     </div>";
 
